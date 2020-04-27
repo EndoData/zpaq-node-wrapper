@@ -1,0 +1,14 @@
+{
+  "name": "zpaq_node_wrapper",
+  "version": "0.0.1",
+  "description": "A very basic nodejs wrapper around the zpaq cli",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jeremy Dahan",
+  "license": "MIT",
+  "dependencies": {
+    "execa": "^4.0.0"
+  }
+}
