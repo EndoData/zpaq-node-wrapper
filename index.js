@@ -1,38 +1,39 @@
 const execa = require('execa');
 const path = require('path')
 
-const zpaqBinPath = process.platform === 'win32' ? './zpaq.exe' : './zpaq' ;
 
-const execaOptions = { cwd : path.join(__dirname, 'bin') }
 
-const listVersions = async function(archivePath){
+let zpaqBinPath = path.join(__dirname.replace('app.asar', 'app.asar.unpacked'), 'bin', process.platform === 'win32' ? 'zpaq.exe' : 'zpaq')
+
+const listVersions = async function(folderPath, archiveRelativePath){
 	const { stdout, stderr } = await execa(zpaqBinPath, [
 		'v',
-		archivePath,
+		archiveRelativePath,
 		'-s1' // Summary level 1 option, which means quiet after our modifications
-	], execaOptions)
+	], { cwd : folderPath, shell : true})
 	return stdout.split(/\r?\n/)
 }
 
-const addFiles = async function(archivePath, files){
+const addFile = async function(folderPath, archiveRelativePath, fileRelativePath){
 	const { stdout, stderr } = await execa(zpaqBinPath, [
 		'add',
-		archivePath,
-		files,
+		archiveRelativePath,
+		fileRelativePath,
 		'-s1' // Summary level 1 option, which means quiet after our modifications
-	], execaOptions)
+	], { cwd : folderPath, shell : true})
 	return stdout.split(/\r?\n/)
 }
 
-const extractVersion = async function(archivePath, versionDate){
+const extractUntil = async function(folderPath, archiveRelativePath, versionDate){
 	const { stdout, stderr } = await execa(zpaqBinPath, [
 		'x',
-		archivePath,
+		archiveRelativePath,
 		'-until',
 		versionDate,
-		'-s1' // Summary level 1 option, which means quiet after our modifications
-	], execaOptions)
+		'-s1', // Summary level 1 option, which means quiet after our modifications
+		'-f'
+	], { cwd : folderPath, shell : true})
 	return stdout.split(/\r?\n/)
 }
 
-module.exports = {listVersions, addFiles, extractVersion};
+module.exports = {listVersions, addFile, extractUntil};
