@@ -1189,11 +1189,6 @@ int Jidac::doCommand(int argc, const char** argv) {
   version=DEFAULT_VERSION;
   date=0;
 
-  if(summary<=0){
-    printf("zpaq v" ZPAQ_VERSION " journaling archiver, compiled "
-           __DATE__ "\n"); 
-  }
-
   // Init archive state
   ht.resize(1);  // element 0 not used
   ver.resize(1); // version 0
@@ -1321,6 +1316,12 @@ int Jidac::doCommand(int argc, const char** argv) {
       }
       usage();
     }
+  }
+
+
+  if(summary<=0){ 
+    printf("zpaq v" ZPAQ_VERSION " journaling archiver, compiled "
+           __DATE__ "\n"); 
   }
 
   // Set threads
@@ -2300,8 +2301,8 @@ int Jidac::add() {
     StringBuffer sb(blocksize+4096-128);
     for (unsigned fi=0; fi<vf.size(); ++fi) {
       DTMap::iterator p=vf[fi];
-      print_progress(total_size, total_done, summary);
       if (summary<=0) {
+        print_progress(total_size, total_done, summary);
         printf("+ ");
         printUTF8(p->first.c_str());
         printf(" %1.0f\n", p->second.size+0.0);
@@ -2533,7 +2534,9 @@ int Jidac::add() {
             m+=","+itos(redundancy/(sb.size()/256+1))
                  +","+itos((exe>frags)*2+(text>frags));
           string fn="jDC"+itos(date, 14)+"d"+itos(ht.size()-frags, 10);
-          print_progress(total_size, total_done, summary);
+          if(summary<=0){
+            print_progress(total_size, total_done, summary);
+          }
           if (summary<=0)
             printf("[%u..%u] %u -method %s\n",
                 unsigned(ht.size())-frags, unsigned(ht.size())-1,
@@ -2578,8 +2581,8 @@ int Jidac::add() {
     if (fi<vf.size()) {
       dedupesize+=fsize;
       DTMap::iterator p=vf[fi];
-      print_progress(total_size, total_done, summary);
       if (summary<=0) {
+        print_progress(total_size, total_done, summary);
         string newname=rename(p->first.c_str());
         DTMap::iterator a=dt.find(newname);
         if (a==dt.end() || a->second.date==0) printf("+ ");
@@ -2737,9 +2740,11 @@ int Jidac::add() {
     }
   }
   fflush(stdout);
-  fprintf(stderr, "\n%1.6f + (%1.6f -> %1.6f -> %1.6f) = %1.6f MB\n",
-      header_pos/1000000.0, total_size/1000000.0, dedupesize/1000000.0,
-      (archive_end-header_pos)/1000000.0, archive_end/1000000.0);
+  if(summary<=0){    
+    fprintf(stderr, "\n%1.6f + (%1.6f -> %1.6f -> %1.6f) = %1.6f MB\n",
+        header_pos/1000000.0, total_size/1000000.0, dedupesize/1000000.0,
+        (archive_end-header_pos)/1000000.0, archive_end/1000000.0);
+  }
   return errors>0;
 }
 
@@ -2892,8 +2897,8 @@ ThreadReturn decompressThread(void* arg) {
         d.readComment();
         while (out.size()<output_size && d.decompress(1<<14));
         lock(job.mutex);
-        print_progress(job.total_size, job.total_done, job.jd.summary);
         if (job.jd.summary<=0)
+          print_progress(job.total_size, job.total_done, job.jd.summary);
           printf("[%d..%d] -> %1.0f\n", b.start, b.start+b.size-1,
               out.size()+0.0);
         release(job.mutex);
@@ -3593,8 +3598,8 @@ int Jidac::list() {
     scandir(files[i].c_str());
   if (files.size() && (summary<=0)){
     printf("%d external files.\n", int(edt.size()));
+    printf("\n");
   }
-  printf("\n");
 
   // Compute directory sizes as the sum of their contents
   DTMap* dp[2]={&dt, &edt};
@@ -3792,8 +3797,10 @@ int main() {
     errorcode=2;
   }
   fflush(stdout);
-  fprintf(stderr, "%1.3f seconds %s\n", (mtime()-global_start)/1000.0,
-      errorcode>1 ? "(with errors)" :
-      errorcode>0 ? "(with warnings)" : "(all OK)");
+  if(errorcode>0){
+    fprintf(stderr, "%1.3f seconds %s\n", (mtime()-global_start)/1000.0,
+        errorcode>1 ? "(with errors)" :
+        errorcode>0 ? "(with warnings)" : "(all OK)");
+  }
   return errorcode;
 }
