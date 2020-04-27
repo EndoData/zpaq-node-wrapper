@@ -998,6 +998,13 @@ struct VER {
   int deletes;           // file deletions
   unsigned firstFragment;// first fragment ID
   VER() {memset(this, 0, sizeof(*this));}
+  string toString()
+  {
+    return ">" + 
+    dateToString(date) + 
+    "\t" + 
+    std::to_string(updates + deletes);
+  }
 };
 
 // Windows API functions not in Windows XP to be dynamically loaded
@@ -1058,6 +1065,7 @@ private:
   int add();                // add, return 1 if error else 0
   int extract();            // extract, return 1 if error else 0
   int list();               // list, return 0
+  int listVersions();               // list, return 0
   void usage();             // help
 
   // Support functions
@@ -1201,7 +1209,7 @@ int Jidac::doCommand(int argc, const char** argv) {
   for (int i=1; i<argc; ++i) {
     const string opt=argv[i];  // read command
     if ((opt=="add" || opt=="extract" || opt=="list" || opt=="convert"
-         || opt=="a" || opt=="x" || opt=="l" || opt=="c")
+         || opt=="a" || opt=="x" || opt=="l" || opt=="c" || opt=="v")
         && i<argc-1 && argv[i+1][0]!='-' && command==0) {
       command=opt[0];
       if (opt=="extract") command='x';
@@ -1353,6 +1361,7 @@ int Jidac::doCommand(int argc, const char** argv) {
   if (command=='a' && files.size()>0) return add();
   else if (command=='x') return extract();
   else if (command=='l') list();
+  else if (command=='v') listVersions();
   else usage();
   return 0;
 }
@@ -3561,6 +3570,17 @@ bool compareName(DTMap::const_iterator p, DTMap::const_iterator q) {
   return p->second.data<q->second.data;
 }
 
+// List versions
+int Jidac::listVersions() {
+
+  // Read archive into dt, which may be "" for empty.
+  int64_t csize=0;
+  if (archive!="") csize=read_archive(archive.c_str());
+  for(int i = 1; i< ver.size(); i++){
+    printf("%s\n", ver[i].toString().c_str());
+  }
+  return 1;
+}
 // List contents
 int Jidac::list() {
 
