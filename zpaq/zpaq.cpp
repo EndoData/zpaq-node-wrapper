@@ -1000,10 +1000,7 @@ struct VER {
   VER() {memset(this, 0, sizeof(*this));}
   string toString()
   {
-    return ">" + 
-    dateToString(date) + 
-    "\t" + 
-    std::to_string(updates + deletes);
+    return dateToString(date);
   }
 };
 
