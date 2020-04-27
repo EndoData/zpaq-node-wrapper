@@ -1,4 +1,5 @@
 zpaq715.zip, Aug. 17, 2016.
+Slightly modified for zpaq_node_wrapper
 
 zpaq is a journaling archiver optimized for user-level incremental
 backup of directory trees in Windows and *nix. It supports AES-256
