@@ -1,0 +1,20 @@
+# To Compile
+
+Refer to https://github.com/zpaq/zpaq 
+
+## Windows
+
+Use http://files.1f0.de/mingw/mingw-w64-gcc-6.1-stable-r20.7z
+Use the compiler binaries in bin/
+
+For 64bit 
+86_64-w64-mingw32-g++.exe -O3 -s -m64 -msse2 -static zpaq.cpp libzpaq.cpp -o zpaq64
+
+For 32bit
+i686-w64-mingw32-g++.exe -O3 -s -m32 -msse2 -static zpaq.cpp libzpaq.cpp -o zpaq
+
+Magic !
+
+## Mac
+
+Probably use the makefile. I can't remember.
