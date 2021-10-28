@@ -15,7 +15,7 @@ let zpaqBinPath = path.join(
  * @param  {string} basePath The path form which the zpaq command is executed.
  * All files added with relative paths must be relative to this directory.
  * @param  {string} archivePath The path to the zpaq archive
- * @return {Promsise.<Array<string>>} The archive versions formated as `YYYY-MM-DD HH:mm:SS` strings
+ * @return {Promsise.<Array<string>>} The archive versions formated as `YYYY-MM-DD HH:mm:SS` strings (UTC)
  */
 const listVersions = async function (basePath, archivePath) {
   const { stdout, stderr } = await execa(
@@ -60,7 +60,7 @@ const addFile = async function (basePath, archivePath, relativeFilePath) {
  * @param  {string} basePath The path form which the zpaq command is executed.
  * All files added with relative paths must be relative to this directory.
  * @param  {string} archivePath The path to the zpaq archive
- * @param  {string} versionDate The date until which to extract the archive
+ * @param  {string} versionDate The date until which to extract the archive (UTC)
  * @return {Promise.<execa.ExecaReturnBase>} The execa process
  */
 const extractUntil = async function (basePath, archivePath, versionDate) {

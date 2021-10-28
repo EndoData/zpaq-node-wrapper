@@ -36,7 +36,7 @@ The path to the binary executable for zpaq. Works in electron environments. Work
 
 Lists all versions of an archive
 
-**Returns**: <code>Promsise.&lt;Array.&lt;string&gt;&gt;</code> - The archive versions formated as `YYYY-MM-DD HH:mm:SS` strings
+**Returns**: <code>Promsise.&lt;Array.&lt;string&gt;&gt;</code> - The archive versions formated as `YYYY-MM-DD HH:mm:SS` strings (UTC)
 
 | Param       | Type                | Description                                                                                                               |
 | ----------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------- |
@@ -69,7 +69,7 @@ Extract an archive until a given date.
 | ----------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | basePath    | <code>string</code> | The path form which the zpaq command is executed. All files added with relative paths must be relative to this directory. |
 | archivePath | <code>string</code> | The path to the zpaq archive                                                                                              |
-| versionDate | <code>string</code> | The date until which to extract the archive                                                                               |
+| versionDate | <code>string</code> | The date until which to extract the archive (UTC)                                                                         |
 
 ## To Compile
 
