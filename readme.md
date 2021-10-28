@@ -4,18 +4,80 @@ A very basic nodejs wrapper around the [zpaq cli](https://github.com/zpaq/zpaq).
 
 Using zpaq 7.15 as a base, I also added an option to list all versions using 'v'.
 
-## Usage
+## Documentation
 
-```js
-import zpaq from "zpaq-node-wrapper";
+### Members
 
-async function main() {
-  //
-  await zpaq.listVersions(folderPath, archiveRelativePath);
-  await zpaq.addFile(folderPath, archiveRelativePath, fileRelativePath);
-  await zpaq.extractUntil(folderPath, archiveRelativePath, versionDate);
-}
-```
+<dl>
+<dt><a href="#zpaqBinPath">zpaqBinPath</a></dt>
+<dd><p>The path to the binary executable for zpaq. Works in electron environments. Works with macOS and windows.</p>
+</dd>
+</dl>
+
+### Functions
+
+<dl>
+<dt><a href="#listVersions">listVersions(basePath, archivePath)</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
+<dd><p>Lists all versions of an archive</p>
+</dd>
+<dt><a href="#addFile">addFile(basePath, archivePath, relativeFilePath)</a> ⇒ <code>execa.ExecaReturnBase</code></dt>
+<dd><p>Adds a relative or absolute file or directory to an archive.</p>
+</dd>
+<dt><a href="#extractUntil">extractUntil(basePath, archivePath, versionDate)</a> ⇒ <code>execa.ExecaReturnBase</code></dt>
+<dd><p>Extract an archive until a given date.</p>
+</dd>
+</dl>
+
+<a name="zpaqBinPath"></a>
+
+#### zpaqBinPath
+
+The path to the binary executable for zpaq. Works in electron environments. Works with macOS and windows.
+
+**Kind**: global variable  
+<a name="listVersions"></a>
+
+#### listVersions(basePath, archivePath) ⇒ <code>Array.&lt;string&gt;</code>
+
+Lists all versions of an archive
+
+**Kind**: global function  
+**Returns**: <code>Array.&lt;string&gt;</code> - The archive versions formated as `YYYY-MM-DD HH:mm:SS` strings
+
+| Param       | Type                | Description                                                                                                               |
+| ----------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| basePath    | <code>string</code> | The path form which the zpaq command is executed. All files added with relative paths must be relative to this directory. |
+| archivePath | <code>string</code> | The path to the zpaq archive                                                                                              |
+
+<a name="addFile"></a>
+
+#### addFile(basePath, archivePath, relativeFilePath) ⇒ <code>execa.ExecaReturnBase</code>
+
+Adds a relative or absolute file or directory to an archive.
+
+**Kind**: global function  
+**Returns**: <code>execa.ExecaReturnBase</code> - The execa process
+
+| Param            | Type                | Description                                                                                                               |
+| ---------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| basePath         | <code>string</code> | The path form which the zpaq command is executed. All files added with relative paths must be relative to this directory. |
+| archivePath      | <code>string</code> | The path to the zpaq archive                                                                                              |
+| relativeFilePath | <code>string</code> | The path to the file or directory to add to the archive. If relative, this path must be relative to basePath              |
+
+<a name="extractUntil"></a>
+
+#### extractUntil(basePath, archivePath, versionDate) ⇒ <code>execa.ExecaReturnBase</code>
+
+Extract an archive until a given date.
+
+**Kind**: global function  
+**Returns**: <code>execa.ExecaReturnBase</code> - The execa process
+
+| Param       | Type                | Description                                                                                                               |
+| ----------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| basePath    | <code>string</code> | The path form which the zpaq command is executed. All files added with relative paths must be relative to this directory. |
+| archivePath | <code>string</code> | The path to the zpaq archive                                                                                              |
+| versionDate | <code>string</code> | The date until which to extract the archive                                                                               |
 
 ## To Compile
 

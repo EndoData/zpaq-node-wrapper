@@ -9,10 +9,12 @@ let zpaqBinPath = path.join(
 );
 
 /**
+ * Lists all versions of an archive
+ *
  * @param  {string} basePath The path form which the zpaq command is executed.
  * All files added with relative paths must be relative to this directory.
  * @param  {string} archivePath The path to the zpaq archive
- * @return {Array<string>} The archive versions formated as YYYY-MM-DD HH:mm:SS strings
+ * @return {Array<string>} The archive versions formated as `YYYY-MM-DD HH:mm:SS` strings
  */
 const listVersions = async function (basePath, archivePath) {
   const { stdout, stderr } = await execa(
@@ -28,6 +30,8 @@ const listVersions = async function (basePath, archivePath) {
 };
 
 /**
+ * Adds a relative or absolute file or directory to an archive.
+ *
  * @param  {string} basePath The path form which the zpaq command is executed.
  * All files added with relative paths must be relative to this directory.
  * @param  {string} archivePath The path to the zpaq archive
@@ -48,6 +52,8 @@ const addFile = async function (basePath, archivePath, relativeFilePath) {
 };
 
 /**
+ * Extract an archive until a given date.
+ *
  * @param  {string} basePath The path form which the zpaq command is executed.
  * All files added with relative paths must be relative to this directory.
  * @param  {string} archivePath The path to the zpaq archive
