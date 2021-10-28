@@ -11,10 +11,11 @@ let zpaqBinPath = path.join(
 /**
  * Lists all versions of an archive
  *
+ * @async
  * @param  {string} basePath The path form which the zpaq command is executed.
  * All files added with relative paths must be relative to this directory.
  * @param  {string} archivePath The path to the zpaq archive
- * @return {Array<string>} The archive versions formated as `YYYY-MM-DD HH:mm:SS` strings
+ * @return {Promsise.<Array<string>>} The archive versions formated as `YYYY-MM-DD HH:mm:SS` strings
  */
 const listVersions = async function (basePath, archivePath) {
   const { stdout, stderr } = await execa(
@@ -32,11 +33,12 @@ const listVersions = async function (basePath, archivePath) {
 /**
  * Adds a relative or absolute file or directory to an archive.
  *
+ * @async
  * @param  {string} basePath The path form which the zpaq command is executed.
  * All files added with relative paths must be relative to this directory.
  * @param  {string} archivePath The path to the zpaq archive
  * @param  {string} relativeFilePath The path to the file or directory to add to the archive. If relative, this path must be relative to basePath
- * @return {execa.ExecaReturnBase} The execa process
+ * @return {Promise.<execa.ExecaReturnBase>} The execa process
  */
 const addFile = async function (basePath, archivePath, relativeFilePath) {
   return await execa(
@@ -54,11 +56,12 @@ const addFile = async function (basePath, archivePath, relativeFilePath) {
 /**
  * Extract an archive until a given date.
  *
+ * @async
  * @param  {string} basePath The path form which the zpaq command is executed.
  * All files added with relative paths must be relative to this directory.
  * @param  {string} archivePath The path to the zpaq archive
  * @param  {string} versionDate The date until which to extract the archive
- * @return {execa.ExecaReturnBase} The execa process
+ * @return {Promise.<execa.ExecaReturnBase>} The execa process
  */
 const extractUntil = async function (basePath, archivePath, versionDate) {
   return await execa(

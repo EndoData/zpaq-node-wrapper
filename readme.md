@@ -6,43 +6,37 @@ Using zpaq 7.15 as a base, I also added an option to list all versions using 'v'
 
 ## Documentation
 
-### Members
-
 <dl>
 <dt><a href="#zpaqBinPath">zpaqBinPath</a></dt>
 <dd><p>The path to the binary executable for zpaq. Works in electron environments. Works with macOS and windows.</p>
 </dd>
 </dl>
 
-### Functions
-
 <dl>
-<dt><a href="#listVersions">listVersions(basePath, archivePath)</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
+<dt><a href="#listVersions">listVersions(basePath, archivePath)</a> ⇒ <code>Promsise.&lt;Array.&lt;string&gt;&gt;</code></dt>
 <dd><p>Lists all versions of an archive</p>
 </dd>
-<dt><a href="#addFile">addFile(basePath, archivePath, relativeFilePath)</a> ⇒ <code>execa.ExecaReturnBase</code></dt>
+<dt><a href="#addFile">addFile(basePath, archivePath, relativeFilePath)</a> ⇒ <code>Promise.&lt;execa.ExecaReturnBase&gt;</code></dt>
 <dd><p>Adds a relative or absolute file or directory to an archive.</p>
 </dd>
-<dt><a href="#extractUntil">extractUntil(basePath, archivePath, versionDate)</a> ⇒ <code>execa.ExecaReturnBase</code></dt>
+<dt><a href="#extractUntil">extractUntil(basePath, archivePath, versionDate)</a> ⇒ <code>Promise.&lt;execa.ExecaReturnBase&gt;</code></dt>
 <dd><p>Extract an archive until a given date.</p>
 </dd>
 </dl>
 
 <a name="zpaqBinPath"></a>
 
-#### zpaqBinPath
+### zpaqBinPath
 
 The path to the binary executable for zpaq. Works in electron environments. Works with macOS and windows.
 
-**Kind**: global variable  
 <a name="listVersions"></a>
 
-#### listVersions(basePath, archivePath) ⇒ <code>Array.&lt;string&gt;</code>
+### listVersions(basePath, archivePath) ⇒ <code>Promsise.&lt;Array.&lt;string&gt;&gt;</code>
 
 Lists all versions of an archive
 
-**Kind**: global function  
-**Returns**: <code>Array.&lt;string&gt;</code> - The archive versions formated as `YYYY-MM-DD HH:mm:SS` strings
+**Returns**: <code>Promsise.&lt;Array.&lt;string&gt;&gt;</code> - The archive versions formated as `YYYY-MM-DD HH:mm:SS` strings
 
 | Param       | Type                | Description                                                                                                               |
 | ----------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------- |
@@ -51,12 +45,11 @@ Lists all versions of an archive
 
 <a name="addFile"></a>
 
-#### addFile(basePath, archivePath, relativeFilePath) ⇒ <code>execa.ExecaReturnBase</code>
+### addFile(basePath, archivePath, relativeFilePath) ⇒ <code>Promise.&lt;execa.ExecaReturnBase&gt;</code>
 
 Adds a relative or absolute file or directory to an archive.
 
-**Kind**: global function  
-**Returns**: <code>execa.ExecaReturnBase</code> - The execa process
+**Returns**: <code>Promise.&lt;execa.ExecaReturnBase&gt;</code> - The execa process
 
 | Param            | Type                | Description                                                                                                               |
 | ---------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------- |
@@ -66,12 +59,11 @@ Adds a relative or absolute file or directory to an archive.
 
 <a name="extractUntil"></a>
 
-#### extractUntil(basePath, archivePath, versionDate) ⇒ <code>execa.ExecaReturnBase</code>
+### extractUntil(basePath, archivePath, versionDate) ⇒ <code>Promise.&lt;execa.ExecaReturnBase&gt;</code>
 
 Extract an archive until a given date.
 
-**Kind**: global function  
-**Returns**: <code>execa.ExecaReturnBase</code> - The execa process
+**Returns**: <code>Promise.&lt;execa.ExecaReturnBase&gt;</code> - The execa process
 
 | Param       | Type                | Description                                                                                                               |
 | ----------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------- |
@@ -89,10 +81,16 @@ Use http://files.1f0.de/mingw/mingw-w64-gcc-6.1-stable-r20.7z
 Use the compiler binaries in bin/
 
 For 64bit
+
+```bash
 86_64-w64-mingw32-g++.exe -O3 -s -m64 -msse2 -static zpaq.cpp libzpaq.cpp -o zpaq64
+```
 
 For 32bit
+
+```bash
 i686-w64-mingw32-g++.exe -O3 -s -m32 -msse2 -static zpaq.cpp libzpaq.cpp -o zpaq
+```
 
 ### macOS
 
