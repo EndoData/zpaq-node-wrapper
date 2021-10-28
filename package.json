@@ -1,6 +1,6 @@
 {
   "name": "@endodata/zpaq-node-wrapper",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A very basic nodejs wrapper around the zpaq cli",
   "main": "index.js",
   "scripts": {
