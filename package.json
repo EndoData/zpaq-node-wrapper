@@ -1,6 +1,6 @@
 {
-  "name": "zpaq_node_wrapper",
-  "version": "0.0.1",
+  "name": "zpaq-node-wrapper",
+  "version": "0.0.2",
   "description": "A very basic nodejs wrapper around the zpaq cli",
   "main": "index.js",
   "scripts": {
