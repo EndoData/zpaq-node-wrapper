@@ -4,6 +4,19 @@ A very basic nodejs wrapper around the [zpaq cli](https://github.com/zpaq/zpaq).
 
 Using zpaq 7.15 as a base, I also added an option to list all versions using 'v'.
 
+## Usage
+
+```js
+import zpaq from "zpaq-node-wrapper";
+
+async function main() {
+  //
+  await zpaq.listVersions(folderPath, archiveRelativePath);
+  await zpaq.addFile(folderPath, archiveRelativePath, fileRelativePath);
+  await zpaq.extractUntil(folderPath, archiveRelativePath, versionDate);
+}
+```
+
 ## To Compile
 
 Refer to https://github.com/zpaq/zpaq
