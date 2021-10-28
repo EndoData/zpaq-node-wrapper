@@ -1,5 +1,5 @@
 {
-  "name": "zpaq-node-wrapper",
+  "name": "@endodata/zpaq-node-wrapper",
   "version": "0.0.2",
   "description": "A very basic nodejs wrapper around the zpaq cli",
   "main": "index.js",
@@ -14,5 +14,18 @@
   },
   "devDependencies": {
     "jsdoc-to-markdown": "^7.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EndoData/zpaq-node-wrapper.git"
+  },
+  "keywords": [
+    "zpaq",
+    "backup",
+    "archive"
+  ],
+  "bugs": {
+    "url": "https://github.com/EndoData/zpaq-node-wrapper/issues"
+  },
+  "homepage": "https://github.com/EndoData/zpaq-node-wrapper#readme"
 }
