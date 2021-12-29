@@ -100,3 +100,19 @@ Simply use the makefile :
 cd zpaq;
 make
 ```
+
+
+### To publish to GHCR
+
+Add this to `package.json`
+```json
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
+  },
+```
+
+and add a `.npmrc` to the root of the repo with 
+```.npmrc
+//npm.pkg.github.com/:_authToken=AUTH_TOKEN
+```
+Where `AUTH_TOKEN` is replaced with a GitHub token.

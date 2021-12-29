@@ -1,5 +1,8 @@
 {
   "name": "@endodata/zpaq-node-wrapper",
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
+  },
   "version": "0.0.3",
   "description": "A very basic nodejs wrapper around the zpaq cli",
   "main": "index.js",
